@@ -71,11 +71,20 @@ const Wrapper = styled.div`
     .main-suite{
         width: 80%;
     }
+
 `
 
-function Card({suite,rank}) {
-    const [img, setImg] = useState(undefined)
+const SUIT_MAP = {
+    hearts,
+    diamonds,
+    clubs,
+    spades
+}
 
+function Card({suite,rank}) {
+    const suiteImage = SUIT_MAP[suite] 
+
+   
 
   return (
     <Wrapper > 
@@ -84,7 +93,7 @@ function Card({suite,rank}) {
             
         </div>
         <main>
-            <img className='main-suite' src={img} alt="" />
+            <img className='main-suite' src={suiteImage} alt="" />
         </main>
         <div className="cardfooter sections">
             <h1>{rank}</h1>
