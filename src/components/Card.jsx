@@ -66,6 +66,9 @@ const Wrapper = styled.div`
 
     main{
     height: 60%
+    display:flex;
+    justify-content: center;
+    align-items: center;
     }
 
     .main-suite{
