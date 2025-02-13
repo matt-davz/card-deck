@@ -19,25 +19,11 @@ const Wrapper = styled.div`
 
 
 function App() {
-  const [deck, setDeck] = useState(generateShuffledDeck())
-  const [shuffle, setShuffle] = useState(false)
-
-  useEffect(() => {
-          if(deck.length === 0){
-              setDeck(generateShuffledDeck())
-          }
-          console.log(deck)
-  },[deck])
-
-  const handleClick = () => {
-    console.log('clicked')
-    setDeck(prevDeck => [...prevDeck.slice(0, -1)]);
-}
 
   return (
     <Wrapper>
         <button>SHUFFLE</button>
-        <Deck deck={deck} onClick={() => handleClick()} />
+        <Deck deck onClick={() => handleClick()} />
     </Wrapper>
   )
 }

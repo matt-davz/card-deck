@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Card from './Card'
 import { generateShuffledDeck, addDrawCard } from '../utils/cardlogic'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { removeCardTopCard } from '../features/deckSlice'
 
 const Wrapper = styled.div`
     max-width: 240px;  
@@ -21,16 +22,15 @@ const Wrapper = styled.div`
 `
 
 
-function Deck({deck}) {
-    const [deckState, setDeckState] = useState(deck)
+function Deck() {
+    const deck = useSelector((state) => state.deck.cards)
+    const dispatch = useDispatch()
 
-    useEffect(() => {
-        setDeckState(deck)
-    }, [deck])
-
-
+    const handleClick = () => {
+        dispatch(removeCardTopCard())
+    }
   return (
-   <Wrapper>
+   <Wrapper onClick={() => handleClick()}>
 
     {deck.map((e,i) => {
         const deckLength = deck.length;
