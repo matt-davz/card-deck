@@ -10,9 +10,12 @@ export const deckSlice = createSlice({
         removeCardTopCard: (state, action) => {
         state.cards.pop();
         },
+        newDeck: (state, action) => {
+            state.cards = generateShuffledDeck();
+        }
     },
 });
 
-export const { removeCardTopCard } = deckSlice.actions;
+export const { removeCardTopCard, newDeck } = deckSlice.actions;
 
 export default deckSlice.reducer;
