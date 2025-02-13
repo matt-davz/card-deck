@@ -8,6 +8,12 @@ export const deckSlice = createSlice({
     initialState,
     reducers: {
         removeCardTopCard: (state, action) => {
+
+        if (state.cards.length === 1) {
+            state.cards = generateShuffledDeck();
+            return;
+        }
+
         state.cards.pop();
         },
         newDeck: (state, action) => {

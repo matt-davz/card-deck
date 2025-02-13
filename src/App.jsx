@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './App.css'
 import styled from 'styled-components'
 import Deck from './components/Deck'
 import deckBackground from './assets/perfect-green-grass-downscaled.png'
