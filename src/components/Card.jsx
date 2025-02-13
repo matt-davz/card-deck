@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 
     h1{
     font-size: 2.5rem;
-    color: black;
+    color: ${props => props.color === 'red' ? "red" : "black"};
     padding: 0;
     margin: 0;
     height: fit-content;
@@ -86,12 +86,16 @@ const SUIT_MAP = {
 }
 
 function Card({suite,rank}) {
-    const suiteImage = SUIT_MAP[suite] 
+    const suiteImage = SUIT_MAP[suite]
+    let color = 'black';
 
+    if(suite === 'hearts' || suite === 'diamonds'){
+        color = 'red'
+    }
    
 
   return (
-    <Wrapper > 
+    <Wrapper color={color}> 
         <div className="cardheader sections">
             <h1>{rank}</h1>
             
