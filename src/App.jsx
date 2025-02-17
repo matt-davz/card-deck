@@ -4,6 +4,7 @@ import Deck from './components/Deck'
 import deckBackground from './assets/perfect-green-grass-downscaled.png'
 import { useDispatch } from 'react-redux'
 import { newDeck } from './features/deckSlice'
+import MainMenu from './components/menu/MainMenu'
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ function App() {
     <Wrapper>
         <button onClick={() => handleShuffle()} >SHUFFLE</button>
         <Deck  />
+        <MainMenu />
     </Wrapper>
   )
 }
