@@ -12,7 +12,9 @@ const menuSlice = createSlice({
     reducers: {
         toggleMainMenu: (state, action) => {
             state.mainMenu.isOpen = !state.mainMenu.isOpen;
-        }
+        },
+        toggleNormalPlay: (state, action) => {},
+        toggleQuickPlay: (state, action) => {},
     }
 })
 
