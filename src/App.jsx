@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Deck from './components/Deck'
 import deckBackground from './assets/perfect-green-grass-downscaled.png'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { newDeck } from './features/deckSlice'
 import MainMenu from './components/menu/MainMenu'
 
@@ -18,12 +18,15 @@ const Wrapper = styled.div`
   height: 100vh;
 `
 
+//todo:
+// burger menu button
+
 
 function App() {
   const dispatch = useDispatch()
+  const mainMenuIsOpen = useSelector((state) => state.menu.mainMenu.isOpen)
 
   const handleShuffle = () => {
-    console.log('shuffle')
     dispatch(newDeck())
   }
 
@@ -31,7 +34,12 @@ function App() {
     <Wrapper>
         <button onClick={() => handleShuffle()} >SHUFFLE</button>
         <Deck  />
-        <MainMenu />
+        {
+          mainMenuIsOpen ? 
+          <MainMenu />
+          :
+          null
+        }
     </Wrapper>
   )
 }

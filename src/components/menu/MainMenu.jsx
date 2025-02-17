@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Modal from '../modal/Modal'
+import { useDispatch } from 'react-redux'
+import { toggleMainMenu } from '../../features/menuSlice'
 
 const Wrapper = styled.div`
     display: flex;
@@ -20,14 +22,22 @@ const Wrapper = styled.div`
     }
 `
 
+
 function MainMenu() {
-  return (
+    const dispatch = useDispatch()
+
+    const handleCards = () => {
+        dispatch(toggleMainMenu())
+        console.log('cards')
+    }
+    return (
     <Modal>
         <Wrapper>
             <h1>FLIBBIT</h1>
             <main>
                 <button>Normal Game</button>
                 <button>Quick Game</button>
+                <button onClick={() => handleCards() }>Cards</button>
             </main>
         </Wrapper>
     </Modal>
