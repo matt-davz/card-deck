@@ -1,4 +1,3 @@
-import { meanusArray } from "../features/menu/menus";
 
 export const menuMiddleWear = (store) => (next) => (action) => {
     const menuName = action.payload;

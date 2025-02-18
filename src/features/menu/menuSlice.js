@@ -7,9 +7,6 @@ const initialState = {
     normalPlay: {
         isOpen: false,
     },
-    quickPlay: {
-        isOpen: true,
-    }
 }
 
 const menuSlice = createSlice({
