@@ -1,14 +1,22 @@
-import { addCardToDrawn } from "../features/gameSlice/gameSlice";
+import { addCardToDrawn,addTiedCard } from "../features/gameSlice/gameSlice";
 
 export const deckMiddleWare = (store) => (next) => (action) => {
     
 
     if(action.type === 'deck/removeCardTopCard') {
         const state = store.getState();
-        const drawnCard = state.deck.cards[state.deck.cards.length - 1];
-        const nextCard = state.deck.cards[state.deck.cards.length - 2];
-        store.dispatch(addCardToDrawn(nextCard));
-        console.log('drawnCard', nextCard);
+        const drawnCardsDeck = state.game.drawnCards.cards;
+        const drawnCard = state.deck.cards[state.deck.cards.length - 2];
+        
+        drawnCardsDeck.forEach(existingCard => {
+            if (existingCard.value === drawnCard.value) {
+                console.log('tied card');
+                store.dispatch(addTiedCard([existingCard, drawnCard]));
+            }
+        });
+
+        store.dispatch(addCardToDrawn(drawnCard));
+        console.log('drawnCard', drawnCard);
         console.log(state.game.drawnCards);
     }
 

@@ -9,9 +9,19 @@ const initialState = {
     timestamp: '',        // When the game occurred
     amount: 0,         // Amount paid
     eventName: '',      // Name/title of the event
-    loser: {card:{},playerName:''},         // Person who lost/paid
+    loser: {
+        card:{},
+        playerName:''
+    },         // Person who lost/paid
     players: [],      // Empty for quick games, filled for normal games
-    drawnCards: [],
+    drawnCards: {
+        cards: [],
+        tiedCards: []
+    },
+    flippOff:{
+        isActive: false,
+
+    },
     clientId: '',       // Local storage ID we discussed
     synced: false        // Track if this has been synced to backend
   }
@@ -35,8 +45,8 @@ export const gameSlice = createSlice({
             state.game.deck.push(action.payload)
         },
         addCardToDrawn: (state, action) => {
-            state.drawnCards.push(action.payload)
-            state.drawnCards.sort((a, b) => a.value - b.value)
+            state.drawnCards.cards.push(action.payload)
+            state.drawnCards.cards.sort((a, b) => a.value - b.value)
         },
         addPlayer: (state, action) => {
             state.game.players.push(action.payload)
@@ -61,11 +71,20 @@ export const gameSlice = createSlice({
         },
         endGame: (state, action) => {
             state.start = false;
+
+        },
+        startFlipOff: (state, action) => {
+            
+        },
+        addTiedCard: (state, action) => {
+            action.payload.forEach(card => {
+                state.drawnCards.tiedCards.push(card)
+            })
         }
     }
 });
 
 
-export const { startGame, addDeck, addCardToDrawn, addPlayer, setLoserName, resetGame, normalGame, quickGame, endGame } = gameSlice.actions;
+export const { addTiedCard,startGame, addDeck, addCardToDrawn, addPlayer, setLoserName, resetGame, normalGame, quickGame, endGame } = gameSlice.actions;
 
 export default gameSlice.reducer;

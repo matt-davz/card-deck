@@ -23,9 +23,9 @@ const Wrapper = styled.div`
 
 
 function ResultsMenu() {
-  const lowestCard = useSelector((state) => state.game.drawnCards[0])
+  const lowestCard = useSelector((state) => state.game.drawnCards.cards[0])
 
-  useEffect(() => {console.log(lowestCard)}, [lowestCard])
+  useEffect(() => {console.log(lowestCard)}, [])
 
   return (
     <Modal>
@@ -33,7 +33,7 @@ function ResultsMenu() {
         <h1>End Of Game</h1>
         <form action="submit">
           <main>
-            <Card suite={lowestCard.suite} rank={lowestCard.rank} />
+            <Card />
             <div className='inputContainer'>
 
             </div>
