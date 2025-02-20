@@ -1,10 +1,7 @@
-
-export const menuMiddleWear = (store) => (next) => (action) => {
+export const menuMiddleWare = (store) => (next) => (action) => {
     const menuName = action.payload;
     const state = store.getState(); // Rename to state instead of store
     
-    console.log(state)
-
     if (action.type.startsWith('menu/toggleMenu')) {
         const menuStore = state.menu;
         Object.keys(menuStore).forEach((key) => { // Note: "Objects" -> "Object"

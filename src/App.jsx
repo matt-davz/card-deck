@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import Deck from './components/Deck'
 import deckBackground from './assets/perfect-green-grass-downscaled.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { newDeck } from './features/deckSlice'
+import { newDeck } from './features/deckSlice/deckSlice'
 import MainMenu from './components/menu/MainMenu'
+import ResultsMenu from './components/menu/ResultsMenu'
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,6 +26,7 @@ const Wrapper = styled.div`
 function App() {
   const dispatch = useDispatch()
   const mainMenuIsOpen = useSelector((state) => state.menu.mainMenu.isOpen)
+  const resultsMenuIsOpen = useSelector((state) => state.menu.resultsMenu.isOpen)
 
   const handleShuffle = () => {
     dispatch(newDeck())
@@ -37,6 +39,13 @@ function App() {
         {
           mainMenuIsOpen ? 
           <MainMenu />
+          :
+          null
+        }
+
+        {
+          resultsMenuIsOpen ? 
+          <ResultsMenu />
           :
           null
         }

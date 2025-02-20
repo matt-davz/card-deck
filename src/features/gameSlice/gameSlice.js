@@ -32,7 +32,7 @@ export const gameSlice = createSlice({
             state.game.deck.push(action.payload)
         },
         addCardToDrawn: (state, action) => {
-            state.game.cardsDrawn.push(action.payload)
+            state.drawnCards.push(action.payload)
         },
         addPlayer: (state, action) => {
             state.game.players.push(action.payload)

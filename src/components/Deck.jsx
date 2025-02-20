@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Card from './Card'
 import { generateShuffledDeck, addDrawCard } from '../utils/cardlogic'
 import { useSelector, useDispatch } from 'react-redux'
-import { removeCardTopCard } from '../features/deckSlice'
+import { removeCardTopCard } from '../features/deckSlice/deckSlice'
 
 const Wrapper = styled.div`
     max-width: 240px;  
@@ -34,9 +34,9 @@ function Deck() {
 
     {deck.map((e,i) => {
         const deckLength = deck.length;
-        console.log(deckLength)
+        
         if(i === deckLength - 1){
-            console.log('top card')
+            
             return(
                 <Card key={i} suite={e.suit} rank={e.rank} />
             )

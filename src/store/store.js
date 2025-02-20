@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import deckReducer from '../features/deckSlice'
+import deckReducer from '../features/deckSlice/deckSlice'
 import menuReducer from '../features/menu/menuSlice'
-import gameReducer from '../features/gameSlice'
-import { menuMiddleWear } from '../middleWear/menuMiddleWear'
+import gameReducer from '../features/gameSlice/gameSlice'
+import { menuMiddleWare } from '../middleWare/menuMiddleWare'
+import { deckMiddleWare } from '../middleWare/deckMiddleWare'
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,5 @@ export const store = configureStore({
     menu: menuReducer,
     game: gameReducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(menuMiddleWear)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(menuMiddleWare, deckMiddleWare)
 })
