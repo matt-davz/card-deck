@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { use, useEffect } from 'react'
 import styled from 'styled-components'
 import Modal from '../modal/Modal'
 import Card from '../Card'
@@ -23,6 +23,9 @@ const Wrapper = styled.div`
 
 
 function ResultsMenu() {
+  const lowestCard = useSelector((state) => state.game.drawnCards[0])
+
+  useEffect(() => {console.log(lowestCard)}, [lowestCard])
 
   return (
     <Modal>
@@ -30,7 +33,7 @@ function ResultsMenu() {
         <h1>End Of Game</h1>
         <form action="submit">
           <main>
-            <Card />
+            <Card suite={lowestCard.suite} rank={lowestCard.rank} />
             <div className='inputContainer'>
 
             </div>

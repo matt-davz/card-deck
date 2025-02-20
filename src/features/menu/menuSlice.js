@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     mainMenu: {
-        isOpen: false,
+        isOpen: true,
     },
     normalPlayMenu: {
         isOpen: false,

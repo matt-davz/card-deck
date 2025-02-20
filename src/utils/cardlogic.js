@@ -3,8 +3,9 @@ export function generateDeck() {
     const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
     const deck = [];
     for (let suit of suits) {
-        for (let rank of ranks) {
-            deck.push({ suit, rank });
+        for (let [index,rank] of ranks.entries()) {
+            const value = index + 2; //adds valuation to each card to use for deciding loser
+            deck.push({ suit, rank, value  });
         }
     }
     return deck;

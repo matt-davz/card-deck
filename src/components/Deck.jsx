@@ -41,8 +41,6 @@ function Deck() {
                 <Card key={i} suite={e.suit} rank={e.rank} />
             )
         }
-
-
         return(
             <Card key={i} suite={e.suites} rank={e.rank} />
         )

@@ -2,13 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Unified game result structure
 const initialState = {
-    deck: [],         // Deck of cards used
+    deck: [],
+    start: false,         // Deck of cards used
     gameId: '',         // Unique identifier for each game
     gameType: '',  // Type of game played
     timestamp: '',        // When the game occurred
     amount: 0,         // Amount paid
     eventName: '',      // Name/title of the event
-    loser: '',         // Person who lost/paid
+    loser: {card:{},playerName:''},         // Person who lost/paid
     players: [],      // Empty for quick games, filled for normal games
     drawnCards: [],
     clientId: '',       // Local storage ID we discussed
@@ -19,9 +20,11 @@ const gameStartHelper = (state,action) => {
     const newId = crypto.randomUUID();
     const dateNow = new Date();
 
-    state.game.gameId = id;            
+    state.start = true;
 
-    state.game.timestamp = dateNow.now()
+    state.gameId = id;            
+
+    state.timestamp = dateNow.now()
 }
 
 export const gameSlice = createSlice({
@@ -33,25 +36,36 @@ export const gameSlice = createSlice({
         },
         addCardToDrawn: (state, action) => {
             state.drawnCards.push(action.payload)
+            state.drawnCards.sort((a, b) => a.value - b.value)
         },
         addPlayer: (state, action) => {
             state.game.players.push(action.payload)
         },
+        setLoserName: (state, action) => {
+            state.game.loser.playerName = action.payload
+        },
         resetGame: (state, action) => {
             state.game = initialState
         },
-        noralGame: (state, action) => {
-            gameStartHelper(state,action)
-            state.game.gameType = 'normal'
+        startGame: (state, {gameType}) => {
+            const newId = crypto.randomUUID();
+            state.start = true;
+            state.gameId = newId;            
+            state.timestamp = Date.now();
+            
+            if(gameType === 'normal') {
+                state.gameType = 'normal'
+            } else {
+                state.gameType = 'quick'
+            }
         },
-        quickGame: (state, action) => {
-            gameStartHelper(state,action)
-            state.game.gameType = 'quick'
-        },
+        endGame: (state, action) => {
+            state.start = false;
+        }
     }
 });
 
 
-export const { addDeck, addCardToDrawn, addPlayer, resetGame, normalGame, quickGame } = gameSlice.actions;
+export const { startGame, addDeck, addCardToDrawn, addPlayer, setLoserName, resetGame, normalGame, quickGame, endGame } = gameSlice.actions;
 
 export default gameSlice.reducer;
