@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
 import hearts from '../assets/hearts.svg'
@@ -74,6 +74,7 @@ const Wrapper = styled.div`
 
     .main-suite{
         width: 80%;
+        height: 100%;
     }
 
 `
@@ -92,6 +93,10 @@ function Card({suite,rank}) {
     if(suite === 'hearts' || suite === 'diamonds'){
         color = 'red'
     }
+
+    useEffect(() => {
+        console.log('suite ', suite, 'rank ', rank)
+    },[])
    
 
   return (

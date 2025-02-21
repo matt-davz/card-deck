@@ -5,7 +5,7 @@ export function generateDeck() {
     for (let suit of suits) {
         for (let [index,rank] of ranks.entries()) {
             const value = index + 2; //adds valuation to each card to use for deciding loser
-            deck.push({ suit, rank, value  });
+            deck.push({ suit, rank, value});
         }
     }
     return deck;

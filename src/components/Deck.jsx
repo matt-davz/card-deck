@@ -33,17 +33,7 @@ function Deck() {
    <Wrapper onClick={() => handleClick()}>
 
     {deck.map((e,i) => {
-        const deckLength = deck.length;
-        
-        if(i === deckLength - 1){
-            
-            return(
-                <Card key={i} suite={e.suit} rank={e.rank} />
-            )
-        }
-        return(
-            <Card key={i} suite={e.suites} rank={e.rank} />
-        )
+       return <Card key={i} suite={e.suit} rank={e.rank} />
     })}
 
    </Wrapper>

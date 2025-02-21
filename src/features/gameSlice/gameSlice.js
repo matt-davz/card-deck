@@ -20,7 +20,8 @@ const initialState = {
     },
     flippOff:{
         isActive: false,
-
+        type: '',
+        games: []
     },
     clientId: '',       // Local storage ID we discussed
     synced: false        // Track if this has been synced to backend
