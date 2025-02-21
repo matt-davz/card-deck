@@ -1,26 +1,24 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 
-const Wrapper = styled.button`
-
-`
+const Wrapper = styled.button``;
 
 function EndButton() {
-  const dispatch = useDispatch()
-  const isFlippOff = useSelector((state) => state.game.isFlippOff)    
-  const content = 'END GAME'
+  const dispatch = useDispatch();
+  const isTiedGame = useSelector(state => state.game.isTiedGame);
+  const content = 'END GAME';
 
-  if(isFlippOff.isActive){
-    content = 'HEADS UP'
-  } else if(isFlippOff.type === 'flippOff'){
-    content = 'FLIPP OFF'
+  if (isTiedGame.isActive && isTiedGame.type === 'headsUp') {
+    content = 'HEADS UP';
+  } else if (isTiedGame.isActive && isTiedGame.type === 'flippOff') {
+    content = 'FLIPP OFF';
   }
-  
-  return (
-    <Wrapper>{content}</Wrapper>
-  )
+
+  const handleClick = () => {};
+
+  return <Wrapper onClick={() => handleClick()}>{content}</Wrapper>;
 }
 
-export default EndButton
+export default EndButton;

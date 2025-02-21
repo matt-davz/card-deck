@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { useState } from 'react'
-import hearts from '../assets/hearts.svg'
-import diamonds from '../assets/diamonds.svg'
-import clubs from '../assets/clubs.svg'
-import spades from '../assets/spades.svg'
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { useState } from 'react';
+import hearts from '../assets/hearts.svg';
+import diamonds from '../assets/diamonds.svg';
+import clubs from '../assets/clubs.svg';
+import spades from '../assets/spades.svg';
 
-
-
-
-// TODO: 
-// 
+// TODO:
+//
 
 const Wrapper = styled.div`
     max-width: 240px;  
@@ -35,7 +32,7 @@ const Wrapper = styled.div`
 
     h1{
     font-size: 2.5rem;
-    color: ${props => props.color === 'red' ? "red" : "black"};
+    color: ${props => (props.color === 'red' ? 'red' : 'black')};
     padding: 0;
     margin: 0;
     height: fit-content;
@@ -77,40 +74,36 @@ const Wrapper = styled.div`
         height: 100%;
     }
 
-`
+`;
 
 const SUIT_MAP = {
-    hearts,
-    diamonds,
-    clubs,
-    spades
-}
+  hearts,
+  diamonds,
+  clubs,
+  spades,
+};
 
-function Card({suit,rank}) {
-    const suitImage = SUIT_MAP[suit]
-    let color = 'black';
+function Card({ suit, rank }) {
+  const suitImage = SUIT_MAP[suit];
+  let color = 'black';
 
-    if(suit === 'hearts' || suit === 'diamonds'){
-        color = 'red'
-    }
-
-
-   
+  if (suit === 'hearts' || suit === 'diamonds') {
+    color = 'red';
+  }
 
   return (
-    <Wrapper color={color}> 
-        <div className="cardheader sections">
-            <h1>{rank}</h1>
-            
-        </div>
-        <main>
-            <img className='main-suite' src={suitImage} alt="" />
-        </main>
-        <div className="cardfooter sections">
-            <h1>{rank}</h1>
-        </div>
+    <Wrapper color={color}>
+      <div className="cardheader sections">
+        <h1>{rank}</h1>
+      </div>
+      <main>
+        <img className="main-suite" src={suitImage} alt="" />
+      </main>
+      <div className="cardfooter sections">
+        <h1>{rank}</h1>
+      </div>
     </Wrapper>
-  )
+  );
 }
 
-export default Card
+export default Card;
