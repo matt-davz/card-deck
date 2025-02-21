@@ -33,7 +33,7 @@ function Deck() {
    <Wrapper onClick={() => handleClick()}>
 
     {deck.map((e,i) => {
-       return <Card key={i} suite={e.suit} rank={e.rank} />
+       return <Card key={i} suit={e.suit} rank={e.rank} />
     })}
 
    </Wrapper>

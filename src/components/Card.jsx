@@ -86,17 +86,15 @@ const SUIT_MAP = {
     spades
 }
 
-function Card({suite,rank}) {
-    const suiteImage = SUIT_MAP[suite]
+function Card({suit,rank}) {
+    const suitImage = SUIT_MAP[suit]
     let color = 'black';
 
-    if(suite === 'hearts' || suite === 'diamonds'){
+    if(suit === 'hearts' || suit === 'diamonds'){
         color = 'red'
     }
 
-    useEffect(() => {
-        console.log('suite ', suite, 'rank ', rank)
-    },[])
+
    
 
   return (
@@ -106,7 +104,7 @@ function Card({suite,rank}) {
             
         </div>
         <main>
-            <img className='main-suite' src={suiteImage} alt="" />
+            <img className='main-suite' src={suitImage} alt="" />
         </main>
         <div className="cardfooter sections">
             <h1>{rank}</h1>

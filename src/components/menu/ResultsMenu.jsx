@@ -47,6 +47,7 @@ const Wrapper = styled.div`
 
   .rank{
     margin-top:0;
+    color: ${props => props.color === 'red' ? "red" : "black"};
   }
 
 `
@@ -61,11 +62,16 @@ const SUIT_MAP = {
 function ResultsMenu() {
   const lowestCard = useSelector((state) => state.game.drawnCards.cards[0])
   const dispatch = useDispatch();
-  useEffect(() => {console.log('lowestCard',lowestCard)}, [])
+
+  let rankColor = 'black';
+
+    if(lowestCard.suit === 'hearts' || lowestCard.suit === 'diamonds'){
+        rankColor = 'red'
+  }
 
   return (
     <Modal>
-      <Wrapper>
+      <Wrapper color={rankColor}>
         <div className="card-container">
           <h1>Lowest Card</h1>
           <h1 className='rank'>{lowestCard.rank}</h1>
@@ -73,6 +79,8 @@ function ResultsMenu() {
         </div>
         <form id='quickPlayCreds'>
           <input type="text" placeholder="Enter Name" />
+          <input type="text" placeholder="Amount" />
+          <input type="text" placeholder="Event" />
           <div className="submit-container">
             <button onClick={() => dispatch(continueGame())} type="button">Continue Game</button>
             <button type="submit">Submit</button>
