@@ -11,8 +11,12 @@ export const gameMiddleWare = (store) => (next) => (action) => {
         store.dispatch(toggleMenu('resultsMenu'));
     }
 
+    if(action.type === 'game/continueGame'){
+        store.dispatch(closeAllMenus())
+    }
+
     if(action.type === 'startFlipOff'){
-        
+
     }
     return next(action);
 }

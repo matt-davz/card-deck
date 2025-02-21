@@ -9,6 +9,8 @@ import clubs from '../../assets/clubs.svg'
 import spades from '../../assets/spades.svg'
 
 import { useSelector, useDispatch } from 'react-redux'
+import { closeAllMenus } from '../../features/menu/menuSlice'
+import {continueGame} from '../../features/gameSlice/gameSlice'
 
 const Wrapper = styled.div`
   height:100%;
@@ -58,7 +60,7 @@ const SUIT_MAP = {
 
 function ResultsMenu() {
   const lowestCard = useSelector((state) => state.game.drawnCards.cards[0])
-
+  const dispatch = useDispatch();
   useEffect(() => {console.log('lowestCard',lowestCard)}, [])
 
   return (
@@ -72,7 +74,7 @@ function ResultsMenu() {
         <form id='quickPlayCreds'>
           <input type="text" placeholder="Enter Name" />
           <div className="submit-container">
-            <button type="button">Continue Game</button>
+            <button onClick={() => dispatch(continueGame())} type="button">Continue Game</button>
             <button type="submit">Submit</button>
           </div>
         </form>

@@ -18,11 +18,11 @@ const menuSlice = createSlice({
     reducers: {
         closeAllMenus: (state, action) => {
             if(!action.payload) { // if there is no specified menu calling this action close all menus
-                Object.keys(state).forEach((key) => { // Remove ".menu" here
+                Object.keys(state).forEach((key) => { 
                     state[key].isOpen = false;
                 });
             } else {
-                Object.keys(state).forEach((key) => { // Remove ".menu" here
+                Object.keys(state).forEach((key) => { 
                     if(key !== action.payload) {
                         state[key].isOpen = false;
                     }

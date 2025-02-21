@@ -74,6 +74,9 @@ export const gameSlice = createSlice({
             state.start = false;
 
         },
+        continueGame: (state, action) => {
+            state.start = true;
+        },
         startFlipOff: (state, action) => {
             
         },
@@ -81,11 +84,14 @@ export const gameSlice = createSlice({
             action.payload.forEach(card => {
                 state.drawnCards.tiedCards.push(card)
             })
+        },
+        submitResults: (state, action) => {
+            state.synced = true;
         }
     }
 });
 
 
-export const { addTiedCard,startGame, addDeck, addCardToDrawn, addPlayer, setLoserName, resetGame, normalGame, quickGame, endGame } = gameSlice.actions;
+export const { continueGame, addTiedCard,startGame, addDeck, addCardToDrawn, addPlayer, setLoserName, resetGame, normalGame, quickGame, endGame } = gameSlice.actions;
 
 export default gameSlice.reducer;
