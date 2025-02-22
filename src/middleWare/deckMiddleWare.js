@@ -14,7 +14,7 @@ export const deckMiddleWare = store => next => action => {
       }
       if (existingCard.value === drawnCard.value) {
         console.log('tied card');
-        store.dispatch(addTiedCard([existingCard, drawnCard]));
+        store.dispatch(addTiedCard({drawnCard, existingCard}));
         return;
       }
     });

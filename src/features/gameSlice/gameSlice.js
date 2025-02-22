@@ -58,13 +58,13 @@ export const gameSlice = createSlice({
     resetGame: (state, action) => {
       state.game = initialState;
     },
-    startGame: (state, { gameType }) => {
+    startGame: (state, action) => {
       const newId = crypto.randomUUID();
       state.start = true;
       state.gameId = newId;
       state.timestamp = Date.now();
 
-      if (gameType === 'normal') {
+      if (action.payload === 'normal') {
         state.gameType = 'normal';
       } else {
         state.gameType = 'quick';
@@ -72,19 +72,40 @@ export const gameSlice = createSlice({
     },
     endGame: (state, action) => {
       state.start = false;
+
+      if(state.flippOff.isActive) {
+
+      }
+
     },
     continueGame: (state, action) => {
       state.start = true;
     },
-    startHeadsUp: (state, action) => {
+    startTiedGame: (state, action) => {
       state.flippOff.isActive = true;
-      state.flippOff.type = 'headsUp';
+    
     },
-    startFlipOff: (state, action) => {},
     addTiedCard: (state, action) => {
-      action.payload.forEach(card => {
-        state.drawnCards.tiedCards.push(card);
-      });
+      // handle adding tied card to the state
+      const drawnCard = action.payload.drawnCard;
+      const existingCard = action.payload.existingCard;
+      
+      const currentTiedCards = state.drawnCards.tiedCards;
+
+      if(currentTiedCards.includes(existingCard)){
+        state.drawnCards.tiedCards.push(drawnCard);
+      } else {
+        state.drawnCards.tiedCards.push(existingCard);
+        state.drawnCards.tiedCards.push(drawnCard);
+      }
+      
+
+      //handles setting tiedgame state
+      state.tiedGame.type = 'headsUp';
+
+      if(state.drawnCards.tiedCards.length > 2) { // If there are more than 2 tied card pairs
+        state.tiedGame.type = 'flippOff';
+      }
     },
     submitResults: (state, action) => {
       state.synced = true;

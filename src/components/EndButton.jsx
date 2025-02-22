@@ -2,23 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { endGame } from '../features/gameSlice/gameSlice';
 
 const Wrapper = styled.button``;
 
 function EndButton() {
   const dispatch = useDispatch();
-  const isTiedGame = useSelector(state => state.game.isTiedGame);
-  const content = 'END GAME';
+  const tiedGame = useSelector(state => state.game.tiedGame);
+  let content = 'END GAME';
 
-  if (isTiedGame.isActive && isTiedGame.type === 'headsUp') {
+  if (tiedGame.type === 'headsUp') {
     content = 'HEADS UP';
-  } else if (isTiedGame.isActive && isTiedGame.type === 'flippOff') {
+  } else if (tiedGame.type === 'flippOff') {
     content = 'FLIPP OFF';
   }
 
-  const handleClick = () => {};
-
-  return <Wrapper onClick={() => handleClick()}>{content}</Wrapper>;
-}
+  return <Wrapper onClick={() => dispatch(endGame())}>{content}</Wrapper>;
+} 
 
 export default EndButton;
