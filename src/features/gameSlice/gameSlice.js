@@ -73,37 +73,42 @@ export const gameSlice = createSlice({
     endGame: (state, action) => {
       state.start = false;
 
-      if(state.flippOff.isActive) {
-
+      if (state.flippOff.isActive) {
       }
-
     },
     continueGame: (state, action) => {
       state.start = true;
     },
     startTiedGame: (state, action) => {
       state.flippOff.isActive = true;
-    
     },
     addTiedCard: (state, action) => {
       // handle adding tied card to the state
       const drawnCard = action.payload.drawnCard;
-      const existingCard = action.payload.existingCard;
-      
-      const currentTiedCards = state.drawnCards.tiedCards;
+      const drawnCardDeck = state.drawnCards.cards;
+      const tiedDeck = state.drawnCards.tiedCards;
+      let matchedCardIndex;
 
-      if(currentTiedCards.includes(existingCard)){
-        state.drawnCards.tiedCards.push(drawnCard);
+      if (drawnCardDeck.length < 1) return; // if drawnDeck is empty do nothing
+
+      const rowIndex = tiedDeck.findIndex(
+        (
+          cardArray // finds the index that contacts the array of matching cards
+        ) => cardArray.some(card => card.rank === drawnCard.rank)
+      );
+
+      if (rowIndex === -1) {
+        // if array of currently matching cards does not exsist
+        tiedDeck.push([drawnCard, drawnCardDeck[matchingIndex]]); // creates new array with the same rank
       } else {
-        state.drawnCards.tiedCards.push(existingCard);
-        state.drawnCards.tiedCards.push(drawnCard);
+        tiedDeck[rowIndex].push(drawnCard); // push to exsisting nested array with same
       }
-      
 
       //handles setting tiedgame state
       state.tiedGame.type = 'headsUp';
 
-      if(state.drawnCards.tiedCards.length > 2) { // If there are more than 2 tied card pairs
+      if (state.drawnCards.tiedCards.length > 2) {
+        // If there are more than 2 tied card pairs
         state.tiedGame.type = 'flippOff';
       }
     },

@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
-import hearts from '../assets/hearts.svg';
-import diamonds from '../assets/diamonds.svg';
-import clubs from '../assets/clubs.svg';
-import spades from '../assets/spades.svg';
+import { useGetSuitImg } from '../hooks/useGetSuitImg';
 
 // TODO:
 //
@@ -76,20 +72,10 @@ const Wrapper = styled.div`
 
 `;
 
-const SUIT_MAP = {
-  hearts,
-  diamonds,
-  clubs,
-  spades,
-};
 
 function Card({ suit, rank }) {
-  const suitImage = SUIT_MAP[suit];
-  let color = 'black';
 
-  if (suit === 'hearts' || suit === 'diamonds') {
-    color = 'red';
-  }
+    const {suitImage,color} = useGetSuitImg(suit)
 
   return (
     <Wrapper color={color}>

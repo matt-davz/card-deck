@@ -5,24 +5,25 @@ export const deckMiddleWare = store => next => action => {
   if (action.type === 'deck/removeCardTopCard') {
     const state = store.getState();
     const currentDeck = state.deck.cards;
-    const drawnCardsDeck = state.game.drawnCards.cards;
-    const drawnCard = state.deck.cards[state.deck.cards.length - 2];
+    const drawnCardDeck = state.game.drawnCards.cards;
+    const drawnCard = state.deck.cards[state.deck.cards.length - 2]; // selects the card that is shown since each top card removal is  
 
-    drawnCardsDeck.forEach((existingCard, i) => {
-      if (drawnCard === undefined) {
-        return;
-      }
-      if (existingCard.value === drawnCard.value) {
-        console.log('tied card');
-        store.dispatch(addTiedCard({drawnCard, existingCard}));
-        return;
-      }
-    });
-
-    if (currentDeck.length === 1) {
-      //if last card of the deck, generate new deck
-      store.dispatch(newDeck());
+    if (
+      // checks to see i the drawn card exsists in current drawnCardsDeck
+      drawnCardDeck.some((card, index) => {
+        if (card.rank === drawnCard) {
+          matchingIndex = index;
+          return true;
+        }
+        return false;
+      })
+    ){
+        store.dispatch(addTiedCard(drawnCard));
     }
+      if (currentDeck.length === 1) {
+        //if last card of the deck, generate new deck
+        store.dispatch(newDeck());
+      }
 
     if (drawnCard === undefined) {
       return;

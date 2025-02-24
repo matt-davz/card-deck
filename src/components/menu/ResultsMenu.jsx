@@ -11,6 +11,7 @@ import spades from '../../assets/spades.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeAllMenus } from '../../features/menu/menuSlice';
 import { continueGame } from '../../features/gameSlice/gameSlice';
+import { useGetSuitImg } from '../../hooks/useGetSuitImg';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -62,19 +63,15 @@ function ResultsMenu() {
   const lowestCard = useSelector(state => state.game.drawnCards.cards[0]);
   const dispatch = useDispatch();
 
-  let rankColor = 'black';
-
-  if (lowestCard.suit === 'hearts' || lowestCard.suit === 'diamonds') {
-    rankColor = 'red';
-  }
-
+  const {suitImage,color} = useGetSuitImg(lowestCard.suit)
+  
   return (
     <Modal>
-      <Wrapper color={rankColor}>
+      <Wrapper color={color}>
         <div className="card-container">
           <h1>Lowest Card</h1>
           <h1 className="rank">{lowestCard.rank}</h1>
-          <img src={SUIT_MAP[lowestCard.suit]} alt="" />
+          <img src={suitImage} alt="" />
         </div>
         <form id="quickPlayCreds">
           <input type="text" placeholder="Enter Name" />

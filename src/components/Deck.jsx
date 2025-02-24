@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   max-height: 336px;
   aspect-ratio: 1.5/1;
 
-  width: 100%;
+width: 100%;
   height: 100%;
 
   position: relative;
@@ -24,11 +24,9 @@ function Deck() {
   const deck = useSelector(state => state.deck.cards);
   const dispatch = useDispatch();
 
-  const handleClick = () => {
-    dispatch(removeCardTopCard());
-  };
+  
   return (
-    <Wrapper onClick={() => handleClick()}>
+    <Wrapper onClick={() => dispatch(removeCardTopCard())}>
       {deck.map((e, i) => {
         return <Card key={i} suit={e.suit} rank={e.rank} />;
       })}

@@ -8,7 +8,7 @@ const GAME_TYPE_MAPPING = {
   default: 'FLIBBIT'
 };
 
-export const useGameType = () => {
+export const useGameType = () => { 
   const gameType = useSelector(state => state.game.gameType);
   const tiedType = useSelector(state => state.game.tiedGame.type);
   const isTiedGameActive = useSelector(state => state.game.tiedGame.isActive);
