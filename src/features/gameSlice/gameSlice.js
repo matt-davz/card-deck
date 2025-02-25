@@ -87,8 +87,10 @@ export const gameSlice = createSlice({
       const drawnCard = action.payload.drawnCard;
       const drawnCardDeck = state.drawnCards.cards;
       const tiedDeck = state.drawnCards.tiedCards;
-      let matchedCardIndex;
+      const matchedCard = action.payload.matchedCard;
 
+      console.log('action payload', action.payload);
+      
       if (drawnCardDeck.length < 1) return; // if drawnDeck is empty do nothing
 
       const rowIndex = tiedDeck.findIndex(
@@ -99,7 +101,7 @@ export const gameSlice = createSlice({
 
       if (rowIndex === -1) {
         // if array of currently matching cards does not exsist
-        tiedDeck.push([drawnCard, drawnCardDeck[matchingIndex]]); // creates new array with the same rank
+        tiedDeck.push([drawnCard, matchedCard]); // creates new array with the same rank
       } else {
         tiedDeck[rowIndex].push(drawnCard); // push to exsisting nested array with same
       }

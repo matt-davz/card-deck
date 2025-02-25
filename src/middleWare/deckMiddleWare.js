@@ -8,17 +8,20 @@ export const deckMiddleWare = store => next => action => {
     const drawnCardDeck = state.game.drawnCards.cards;
     const drawnCard = state.deck.cards[state.deck.cards.length - 2]; // selects the card that is shown since each top card removal is  
 
+    let matchingIndex;
     if (
       // checks to see i the drawn card exsists in current drawnCardsDeck
       drawnCardDeck.some((card, index) => {
-        if (card.rank === drawnCard) {
+        if (card.rank === drawnCard.rank) {
           matchingIndex = index;
           return true;
         }
         return false;
       })
     ){
-        store.dispatch(addTiedCard(drawnCard));
+        const matchedCard = drawnCardDeck[matchingIndex];
+        
+        store.dispatch(addTiedCard({drawnCard,matchedCard}));
     }
       if (currentDeck.length === 1) {
         //if last card of the deck, generate new deck
