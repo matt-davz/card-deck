@@ -103,15 +103,26 @@ export const gameSlice = createSlice({
         // if array of currently matching cards does not exsist
         tiedDeck.push([drawnCard, matchedCard]); // creates new array with the same rank
       } else {
-        tiedDeck[rowIndex].push(drawnCard); // push to exsisting nested array with same
+        tiedDeck[rowIndex].push(drawnCard); // push to exsisting nested array with same rank
       }
 
       //handles setting tiedgame state
-      state.tiedGame.type = 'headsUp';
 
-      if (state.drawnCards.tiedCards.length > 2) {
-        // If there are more than 2 tied card pairs
+      const determinFlipOff = (tiedDeck) => {
+        if (tiedDeck.length > 1) return true 
+
+        tiedDeck.forEach(element => {
+            if(element.length > 2) {
+                return true
+            }
+        });
+        return false
+      }
+      
+      if (determinFlipOff(tiedDeck)) {
         state.tiedGame.type = 'flippOff';
+      } else {
+        state.tiedGame.type = 'headsUp';
       }
     },
     submitResults: (state, action) => {

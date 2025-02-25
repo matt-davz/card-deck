@@ -10,7 +10,7 @@ export const deckMiddleWare = store => next => action => {
 
     let matchingIndex;
     if (
-      // checks to see i the drawn card exsists in current drawnCardsDeck
+      // checks to see if the drawn card exsists in current drawnCardsDeck
       drawnCardDeck.some((card, index) => {
         if (card.rank === drawnCard.rank) {
           matchingIndex = index;
